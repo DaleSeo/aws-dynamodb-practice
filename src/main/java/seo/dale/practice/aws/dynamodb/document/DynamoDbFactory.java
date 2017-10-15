@@ -1,4 +1,4 @@
-package seo.dale.practice.aws.dynamodb;
+package seo.dale.practice.aws.dynamodb.document;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
