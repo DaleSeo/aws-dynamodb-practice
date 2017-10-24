@@ -1,4 +1,4 @@
-package seo.dale.practice.aws.dynamodb.high;
+package seo.dale.practice.aws.dynamodb.guide.high;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -74,7 +74,7 @@ public class DynamoDBMapperBatchWriteExample {
     private static void testBatchWrite(DynamoDBMapper mapper) {
         // Create Forum item to save
         Forum forumItem = new Forum();
-        forumItem.name = "Test BatchWrite Forum";
+        forumItem.name = "Number BatchWrite Forum";
         forumItem.threads = 0;
         forumItem.category = "Amazon Web Services";
 

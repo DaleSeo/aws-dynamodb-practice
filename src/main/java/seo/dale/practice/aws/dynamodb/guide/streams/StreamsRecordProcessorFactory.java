@@ -1,4 +1,4 @@
-package seo.dale.practice.aws.dynamodb.streams;
+package seo.dale.practice.aws.dynamodb.guide.streams;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;

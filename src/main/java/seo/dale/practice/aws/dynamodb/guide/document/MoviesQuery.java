@@ -1,4 +1,4 @@
-package seo.dale.practice.aws.dynamodb.document;
+package seo.dale.practice.aws.dynamodb.guide.document;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.*;
