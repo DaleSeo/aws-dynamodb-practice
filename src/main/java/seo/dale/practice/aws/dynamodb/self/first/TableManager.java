@@ -1,18 +1,16 @@
-package seo.dale.practice.aws.dynamodb;
+package seo.dale.practice.aws.dynamodb.self.first;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.model.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
-public class NumberTableManager {
-    private static final Logger log = LoggerFactory.getLogger(NumberTableManager.class);
-
+@Slf4j
+public class TableManager {
     private final AmazonDynamoDB dynamoDB;
 
-    public NumberTableManager(AmazonDynamoDB dynamoDB) {
+    public TableManager(AmazonDynamoDB dynamoDB) {
         this.dynamoDB = dynamoDB;
     }
 
@@ -25,14 +23,14 @@ public class NumberTableManager {
                 .withAttributeName("id")
                 .withAttributeType(ScalarAttributeType.S);
         AttributeDefinition dateAttr = new AttributeDefinition()
-                .withAttributeName("date")
-                .withAttributeType(ScalarAttributeType.N);
+                .withAttributeName("created")
+                .withAttributeType(ScalarAttributeType.S);
 
         KeySchemaElement hashKey = new KeySchemaElement()
                 .withAttributeName("id")
                 .withKeyType(KeyType.HASH);
         KeySchemaElement rangeKey = new KeySchemaElement()
-                .withAttributeName("date")
+                .withAttributeName("created")
                 .withKeyType(KeyType.RANGE);
 
         CreateTableRequest request = new CreateTableRequest()
@@ -52,7 +50,7 @@ public class NumberTableManager {
     private void waitForTableToBeCreated() {
         long endTime = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5);
         while (System.currentTimeMillis() < endTime) {
-            sleepInSeconds(5);
+            Utils.sleepInSeconds(5);
             DescribeTableResult result = dynamoDB.describeTable(Config.TABLE_NAME);
             if ("ACTIVE".equals(result.getTable().getTableStatus())) {
                 log.info("successfully created\n{}", result);
@@ -76,7 +74,7 @@ public class NumberTableManager {
     private void waitForTableToBeDeleted() {
         long endTime = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5);
         while (System.currentTimeMillis() < endTime) {
-            sleepInSeconds(5);
+            Utils.sleepInSeconds(5);
             try {
                 DescribeTableResult result = dynamoDB.describeTable(Config.TABLE_NAME);
                 log.debug("still deleting table\n{}", result);
@@ -87,13 +85,5 @@ public class NumberTableManager {
         }
 
         throw new RuntimeException("Failed to delete table");
-    }
-
-    public static void sleepInSeconds(long seconds) {
-        try {
-            Thread.sleep(TimeUnit.SECONDS.toMillis(seconds));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

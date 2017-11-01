@@ -74,7 +74,7 @@ public class DynamoDBMapperBatchWriteExample {
     private static void testBatchWrite(DynamoDBMapper mapper) {
         // Create Forum item to save
         Forum forumItem = new Forum();
-        forumItem.name = "Number BatchWrite Forum";
+        forumItem.name = "Item BatchWrite Forum";
         forumItem.threads = 0;
         forumItem.category = "Amazon Web Services";
 
